@@ -5,7 +5,7 @@ class NewCisitorTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.browser.implicitily_wiat(3)
+        self.browser.implicitly_wait(3)
 
     def tearDown(self):
         self.browser.quit()
