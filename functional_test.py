@@ -22,7 +22,10 @@ class NewCisitorTest(unittest.TestCase):
 
         # 그녀는 바로 작업을 추가하기로 한다
         inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertEqual(inputbox.get_attribute('placeholder'))
+        self.assertEqual(
+                inputbox.get_attribute('placeholder'),
+                'input a task item'
+        )
 
         # "공작깃털 사기"라고 텍스트 상자에 입력한다
         # (에디스의 취미는 날치 잡이용 그물을 만드는 것이다)
