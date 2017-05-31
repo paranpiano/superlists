@@ -29,11 +29,11 @@ class NewCisitorTest(unittest.TestCase):
 
         # "공작깃털 사기"라고 텍스트 상자에 입력한다
         # (에디스의 취미는 날치 잡이용 그물을 만드는 것이다)
-        inputbox.send_keys('1: Bying peacok feather')
+        inputbox.send_keys('Bying peacok feather')
         inputbox.send_keys(Keys.ENTER)
 
         import time
-        time.sleep(10)
+        time.sleep(2)
         table = self.browser.find_element_by_id('id_list_table')
 
         rows = table.find_elements_by_tag_name('tr')
