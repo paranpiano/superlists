@@ -14,8 +14,24 @@ class HomePageTest(TestCase):
     def test_home_page_returns_correct_html(self):
         request = HttpRequest()
         response = home_page(request)
+
         expected_html = render_to_string('home.html')
-        self.assertTrue(response.content.decode() , expected_html)
+
+        self.assertTrue(response.content.decode(), expected_html)
+
+    def test_home_page_can_save_a_POST_request(self):
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['item_text'] = '1: Bying peacok feather'
+
+        response = home_page(request)
+        self.assertIn('1: Bying peacok feather', response.content.decode())
+
+        expected_html = render_to_string(
+            'home.html',
+            {'new_item_text': '1: Bying peacok feather'}
+        )
+        self.assertEqual(response.content.decode(), expected_html)
 
 #class SmokeTest(TestCase):
 
