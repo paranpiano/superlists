@@ -8,6 +8,7 @@ import unittest
 class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
+        #self.browser = webdriver.Chrome()
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
 
