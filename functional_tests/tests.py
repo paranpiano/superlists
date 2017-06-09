@@ -79,6 +79,7 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys(Keys.ENTER)
 
         #natalia가 전용 URIL을 취득한다.
+        time.sleep(1)
         natalia_list_url = self.browser.current_url
         self.assertRegex(natalia_list_url, '/lists/.+')
         self.assertNotEqual(natalia_list_url, chajin_list_url)
