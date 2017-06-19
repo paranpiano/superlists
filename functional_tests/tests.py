@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 import time
+import os
 
 import unittest
 
@@ -9,7 +10,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(3)
+        staging_server = os.environ.get('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url = 'http://' + staging_server
 
     def tearDown(self):
         self.browser.quit()
@@ -89,8 +92,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
          page_text = self.browser.find_element_by_tag_name('body').text
          self.assertNotIn('Buying peacock feather', page_text)
          self.assertIn('Buying milk' , page_text)
-
+         print('test_can_start_a_list_and_retrieve_it_later test done')
          # 둘 다 만족하고 잠자리에 든다
+
+
 
     def test_layout_and_styling(self):
         # Edith goes to the home page
@@ -106,5 +111,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
             512,
             delta=10
         )
+
+        print('test_layout_and_styling test done')
 
 
