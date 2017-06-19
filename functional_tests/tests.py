@@ -62,6 +62,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
          ## 새로운 브라우저 세션을 이용해서 에디스의 정보가
          ## 쿠키를 통해 유입되는 것을 방지한다
+         self.browser.refresh();
          self.browser.quit()
          self.browser = webdriver.Firefox()
 
