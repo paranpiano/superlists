@@ -5,24 +5,12 @@
 </head>
 <body>
     <h1>Start you item list</h1>
-
     <form method="POST" action="/lists/new">
-        <input name="item_text" id="id_new_item" placeholder="input a task item" />
-        {% csrf_token %}
+        <p style="text-align: center;">
+            <input name="item_text" id="id_new_item" placeholder="input a task item" />
+        </p>
+    {% csrf_token %}
     </form>
 
 </body>
 </html>
-<!--<html>-->
-    <!--<head>-->
-        <!--<title>To-Do lists</title>-->
-    <!--</head>-->
-
-    <!--<body>-->
-        <!--<h1>작업 목록 시작</h1>-->
-        <!--<form method="POST" action="/lists/new">-->
-            <!--<input name="item_text" id="id_new_item" placeholder="input a task item" />-->
-            <!--{% csrf_token %}-->
-        <!--</form>-->
-    <!--</body>-->
-<!--</html>-->
