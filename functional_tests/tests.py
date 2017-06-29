@@ -2,17 +2,24 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 import time
-import os
+import sys
 
 import unittest
 
 class NewVisitorTest(StaticLiveServerTestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        for arg in sys.argv:
+            if 'liveserver' in arg:
+                cls.server_url = 'http://' + arg.split('=')[1]
+                return
+        super().setUpClass()
+        cls.server_url = cls.live_server_url
+
     def setUp(self):
         self.browser = webdriver.Firefox()
-        staging_server = os.environ.get('STAGING_SERVER')
-        if staging_server:
-            self.live_server_url = 'http://' + staging_server
+        self.browser.implicitly_wait(3)
 
     def tearDown(self):
         self.browser.quit()
@@ -25,7 +32,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def test_can_start_a_list_and_retrieve_it_later(self):
          # 에디스(Edith)는 멋진 작업 목록 온라인 앱이 나왔다는 소식을 듣고
          # 해당 웹 사이트를 확인하러 간다
-         self.browser.get(self.live_server_url)
+         self.browser.get(self.server_url)
 
          # 웹 페이지 타이틀과 헤더가 ‘To-Do’를 표시하고 있다
          header_text = self.browser.find_element_by_tag_name('h1').text
@@ -71,7 +78,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
          # natalia 가 홈페이지에 접속한다
          # chajin 리스트는 보이지 않는다
-         self.browser.get(self.live_server_url)
+         self.browser.get(self.server_url)
          page_text = self.browser.find_element_by_tag_name('body').text
          self.assertNotIn('Buying peacock feather',page_text)
          self.assertNotIn('making a net with peacock feather',page_text)
@@ -99,7 +106,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
     def test_layout_and_styling(self):
         # Edith goes to the home page
-        self.browser.get(self.live_server_url)
+        self.browser.get(self.server_url)
         self.browser.set_window_size(1024, 768)
 
 
